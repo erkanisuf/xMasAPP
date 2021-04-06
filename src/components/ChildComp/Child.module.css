@@ -1,0 +1,15 @@
+.childContainerProducts {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+  width: 95%;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  height: 95%;
+}
+.childContainerProducts div {
+  flex: 1;
+}
