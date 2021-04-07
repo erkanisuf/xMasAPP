@@ -1,8 +1,6 @@
-import React from "react";
-import { useFetch } from "../../Hooks/useFetch"; // Custom Hook for Fetching Data
+import React, { useEffect, useState } from "react";
+import { useAppSelector } from "../../Redux/hooks";
 import ProductCSS from "./Product.module.css"; // Styling
-import { GrFormCheckmark } from "react-icons/gr"; //Icon
-import { IoMdClose } from "react-icons/io"; //Icon
 
 export interface IProduct {
   id: number;
@@ -11,10 +9,11 @@ export interface IProduct {
   description: string;
   category: string;
   image: string;
+  discount?: number;
 }
 
 export interface IProductProp {
-  productId: string | number;
+  productId: number;
 }
 
 export interface IuseFetch {
@@ -22,35 +21,50 @@ export interface IuseFetch {
   isLoading: boolean;
   error: any;
 }
+//Products are searched from the redux main state with .fid(), another alternative would be to fetch single product from the API but it feels slower.
 const Product: React.FC<IProductProp> = ({ productId }) => {
-  const { response, isLoading, error }: IuseFetch = useFetch(
-    `https://fakestoreapi.com/products/${productId.toString()}`
-  );
+  const allMainStateProducts = useAppSelector((state) => state.main.products); // Redux Approved Childen list
+  const reduxState = useAppSelector((state) => state.main); // Redux Hook of State
+  const reduxStateProducts = useAppSelector((state) => state.childrens); // Redux Hook of State
+  const [product, setProduct] = useState<IProduct>();
+
+  useEffect(() => {
+    //Finds the product from the State
+    const findItemFromState = () => {
+      const findProduct = reduxState.products.find((el) => el.id === productId);
+      setProduct(findProduct);
+    };
+    findItemFromState();
+
+    return () => {};
+  }, [
+    productId,
+    reduxState.products,
+    reduxStateProducts,
+    allMainStateProducts,
+  ]);
 
   return (
     <div className={ProductCSS.productContainer}>
       <div>
-        <img src={response?.image} alt={response?.title} />
+        <img src={product?.image} alt={product?.title} />
       </div>
       <div>
         <div>
-          <p>{response?.title}</p>
+          <p>{product?.title}</p>
         </div>
         <div>
           {" "}
-          <span>{response?.price} €</span>
-        </div>
-        <div className={ProductCSS.buttonsContainer}>
-          <button className={ProductCSS.approve}>
-            <GrFormCheckmark size="25px" />
-          </button>
-          <button className={ProductCSS.disapprove}>
-            <IoMdClose size="25px" />
-          </button>
+          <span>{product?.price.toFixed(2)} €</span>
+          {product?.discount ? (
+            <span style={{ color: "red" }}>{product.discount}%</span>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default Product;
+export default React.memo(Product);

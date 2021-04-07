@@ -24,6 +24,7 @@ export const useFetch = (url: string, options?: object) => {
       }
     };
     fetchData();
-  }, []);
+    return () => abortController.abort();
+  }, [url, options]);
   return { response, error, isLoading };
 };

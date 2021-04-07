@@ -6,7 +6,7 @@
   padding: 5px;
   justify-content: space-evenly;
   align-items: flex-start;
-  border-bottom: 1px solid #ccc;
+
   max-height: 150px;
   padding-bottom: 15px;
 }
@@ -24,37 +24,4 @@
 .productContainer span {
   font-size: 22px;
   font-weight: 700;
-}
-.buttonsContainer {
-  margin: 5px;
-
-  width: 100%;
-  display: flex;
-}
-.buttonsContainer button {
-  height: 50px;
-  margin: 5px;
-  cursor: pointer;
-  display: flex;
-
-  flex-direction: row;
-  align-items: center;
-  border: none;
-  outline: none;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 18px;
-}
-
-.approve {
-  background-color: #23887d;
-}
-.approve:hover {
-  background-color: #38c394;
-}
-.disapprove {
-  background-color: #ffb0b2;
-}
-.disapprove:hover {
-  background-color: #ff0547;
 }
