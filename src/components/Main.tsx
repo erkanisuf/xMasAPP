@@ -28,9 +28,9 @@ const Main = () => {
       style={{
         width: "100%",
         display: "flex",
-
+        margin: "0 auto",
         height: "100%",
-        justifyContent: "flex-start",
+        justifyContent: "center",
       }}
     >
       {myChildren.map((el, index) => {
