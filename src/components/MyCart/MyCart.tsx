@@ -1,37 +1,68 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { useAppSelector } from "../../Redux/hooks";
-
 import Product from "../Product/Product";
 
 const MyCart = () => {
-  const [myCart, setMyCart] = useState<any>([]);
-  const allApproved = useAppSelector(
-    (state) => state.childrens.ChildrenApprovedItems
-  ); // Redux Approved Childen list
-  const allDisApproved = useAppSelector(
-    (state) => state.childrens.ChildrenDiscardedItems
-  ); // Redux Disapproved Childen list
-  const myChildren = useAppSelector((state) => state.main.myChildren); // Redux Approved Childen list
+  const myCartItems = useAppSelector((state) => state.childrens.myCart); // Redux Approved Childen list
+  const AllProducts = useAppSelector((state) => state.main.products); // Redux Approved Childen list
 
-  //Function that finds the Childens Name from the id
-  const findUserName = (param: number) => {
-    const findChildren = myChildren.find((el) => el.id === param);
-    return findChildren?.name;
+  //Sums Normal Price of product with the quantity and with the Discount
+  const calculateQuantDiscount = (param: number, param2: number) => {
+    const findProductPrice = AllProducts.find((el) => el.id === param);
+    if (findProductPrice) {
+      let value = findProductPrice?.price * param2;
+      let discount = (param2 * 10) / 100;
+      const calculate = value - value * discount;
+      return calculate;
+    }
+  };
+  //Sums Normal Price of product with the quantity
+  const calculateNormalPrice = (param: number, param2: number) => {
+    const findProductPrice = AllProducts.find((el) => el.id === param);
+    if (findProductPrice) {
+      const calculate = findProductPrice?.price * param2;
+      return calculate;
+    }
   };
 
+  //This Sums Total Value of the Cart With discounted items too
+  const sumTotal = () => {
+    const newArr: number[] = [];
+    myCartItems.map((el) => {
+      // if quantity is more than 1 it uses the discount function
+      if (el.quantity > 1) {
+        const findItem = calculateQuantDiscount(el.productId, el.quantity);
+        newArr.push(Number(findItem));
+      } else {
+        const findItem = calculateNormalPrice(el.productId, el.quantity);
+        newArr.push(Number(findItem));
+      }
+    });
+    //gets total value of the cart including the discounted price !
+    const TotalValue = newArr.reduce((a: number, b: number) => a + b, 0);
+    console.log(TotalValue);
+    return TotalValue;
+  };
   return (
     <div>
-      {allApproved.map((el) => {
+      <button onClick={sumTotal}>SUMM</button>{" "}
+      {myCartItems.map((el) => {
         return (
-          <div key={el.userId}>
-            <p>{findUserName(el.userId)}</p>
-            {el.products.map((el2) => {
-              return <Product key={el2.productId} productId={el2.productId} />;
-            })}
+          <div
+            key={el.productId}
+            style={{ backgroundColor: "lightblue", display: "flex" }}
+          >
+            <Product productId={el.productId} />
+            <span>{el.quantity}</span>
+            <p>
+              Total Price:
+              {calculateQuantDiscount(el.productId, el.quantity)?.toFixed(2)} ,
+              Normal({calculateNormalPrice(el.productId, el.quantity)})
+            </p>
           </div>
         );
       })}
+      Total Price: {sumTotal().toFixed(2)}
     </div>
   );
 };

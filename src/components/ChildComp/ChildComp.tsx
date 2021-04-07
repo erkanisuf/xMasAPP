@@ -7,8 +7,9 @@ import { IoMdClose } from "react-icons/io"; //Icon
 import { useFetch } from "../../Hooks/useFetch";
 import Approved from "../Approved/Approved";
 import Discarded from "../Discarded/Discarded";
-import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { useAppSelector } from "../../Redux/hooks";
 import {
+  AddItemToMyCart,
   ChildProductToApproved,
   ChildProductToDiscarded,
 } from "../../Redux/ChildrensSlice";
@@ -19,7 +20,7 @@ export interface IChildCompProp {
   childname: string;
   fetchURL: string;
 }
-export interface Product {
+export interface IProduct {
   productId: number;
   quantity: number;
 }
@@ -27,7 +28,7 @@ export interface ICart {
   id: number;
   userId: number;
   date: Date;
-  products: Product[];
+  products: IProduct[];
   __v: number;
 }
 
@@ -43,8 +44,8 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
   ); // Redux Approved Childen list
   const { response, isLoading, error }: IFetchCart = useFetch(`${fetchURL}`); //Custom Hook fetches data
   const [cart, setCart] = useState<ICart>(response); // Main items on Container(cart items from the API)
-  const [approved, setApproved] = useState<Product[]>([]); // Approved items of wish list , passed to Approved component
-  const [discarded, setDiscarded] = useState<Product[]>([]); // Disapproved items of wish list , passed to Disapproved component
+  const [approved, setApproved] = useState<IProduct[]>([]); // Approved items of wish list , passed to Approved component
+  const [discarded, setDiscarded] = useState<IProduct[]>([]); // Disapproved items of wish list , passed to Disapproved component
 
   //AddsCart for teach children after useFetch returns response .
   useEffect(() => {
@@ -53,7 +54,7 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
   }, [response]);
 
   //Remove Product from Main Cart Container
-  const RemoveProductFromContainer = (param: Product) => {
+  const RemoveProductFromContainer = (param: IProduct) => {
     const copiedCart = { ...cart };
     const findIndex = copiedCart.products?.findIndex(
       (el) => el.productId === param.productId
@@ -65,13 +66,14 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
   };
 
   // Function adds the item to Approved state and component
-  const ApproveProduct = (param: Product) => {
+  const ApproveProduct = (param: IProduct) => {
     //First Adds to Approved State
     const copiedState = [...approved, param];
     setApproved(copiedState);
     // Then Removes the item from the Cart container
     RemoveProductFromContainer(param);
     console.log(approved);
+    //To redux Approved with child`s id (name)
     dispatch(
       ChildProductToApproved({
         userId: cart.id,
@@ -79,11 +81,16 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
         products: [param],
       })
     );
+    //discount % to redux
     discountProduct(param.productId);
+    //to my cart so i can combine in MyCart component later
+    dispatch(
+      AddItemToMyCart({ productId: param.productId, quantity: param.quantity })
+    );
   };
 
   // Function adds the item to Discarded whish list products.
-  const DiscardProduct = (param: Product) => {
+  const DiscardProduct = (param: IProduct) => {
     //First Adds to Approved State
     const copiedState = [...discarded, param];
     setDiscarded(copiedState);
@@ -98,6 +105,7 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
     );
   };
 
+  //Adds To the Rexu state % discount of product
   const discountProduct = (param: number) => {
     const allProducts: any[] = [];
     allApproved.map((el) => el.products.map((z) => allProducts.push(z)));

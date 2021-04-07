@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IProduct } from "../components/Product/Product";
+import { IProductDesc } from "../components/Product/Product";
 import type { RootState } from "./store";
 
 interface IReduxMainSlice {
-  products: IProduct[];
+  products: IProductDesc[];
   myChildren: { id: number; name: string }[];
 }
 interface IChangePrice {
@@ -31,7 +31,7 @@ export const MainSlice = createSlice({
   reducers: {
     //Redux Tips
     // Use the PayloadAction type to declare the contents of `action.payload`
-    addProductsFromApi: (state, action: PayloadAction<IProduct[]>) => {
+    addProductsFromApi: (state, action: PayloadAction<IProductDesc[]>) => {
       state.products = action.payload;
     },
     changeProductPrice: (state, action: PayloadAction<IChangePrice>) => {

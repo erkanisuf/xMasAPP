@@ -1,5 +1,5 @@
 import React from "react";
-import { Product as IProduct } from "../ChildComp/ChildComp";
+import { IProduct } from "../ChildComp/ChildComp";
 import Product from "../Product/Product";
 import { v4 as uuidv4 } from "uuid";
 export interface IApproved {

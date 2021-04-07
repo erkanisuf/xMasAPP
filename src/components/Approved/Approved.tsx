@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Product as IProduct } from "../ChildComp/ChildComp";
+import React from "react";
+import { IProduct } from "../ChildComp/ChildComp";
 import Product from "../Product/Product";
 import { v4 as uuidv4 } from "uuid";
 import ApprovedCSS from "./Approved.module.css";
