@@ -20,7 +20,7 @@ const MyCartApproved = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: "100%", height: "50%", overflow: "scroll" }}>
       {allApproved.map((el) => {
         return (
           <div key={el.userId} style={{ backgroundColor: "green" }}>

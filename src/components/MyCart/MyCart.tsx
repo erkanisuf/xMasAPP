@@ -1,6 +1,9 @@
 import React from "react";
 import { useAppSelector } from "../../Redux/hooks";
+import ConfirmWindow from "../ConfirmWindow/ConfirmWindow";
+import Modal from "../Modal/Modal";
 import Product from "../Product/Product";
+import MyCartCSS from "./MyCart.module.css";
 
 const MyCart = () => {
   const myCartItems = useAppSelector((state) => state.childrens.myCart); // Redux Approved Childen list
@@ -44,26 +47,46 @@ const MyCart = () => {
     return TotalValue;
   };
   return (
-    <div>
-      <button onClick={sumTotal}>SUMM</button>{" "}
-      {myCartItems.map((el) => {
-        return (
-          <div
-            key={el.productId}
-            style={{ backgroundColor: "lightblue", display: "flex" }}
-          >
-            <Product productId={el.productId} />
-            <span>{el.quantity}</span>
-            <p>
-              Total Price:
-              {calculateQuantDiscount(el.productId, el.quantity)?.toFixed(2)} ,
-              Normal({calculateNormalPrice(el.productId, el.quantity)})
-            </p>
+    <Modal>
+      <div className={MyCartCSS.mycartContainer}>
+        <div className={MyCartCSS.totalSumContainer}>
+          <h1>Approved wishes cart</h1>
+          <div>
+            <span>Total value:</span>
+            <p>{sumTotal().toFixed(2)}€</p>
           </div>
-        );
-      })}
-      Total Price: {sumTotal().toFixed(2)}
-    </div>
+          <ConfirmWindow />
+        </div>
+        {myCartItems.map((el) => {
+          return (
+            <div key={el.productId} className={MyCartCSS.productContainer}>
+              <Product productId={el.productId} />
+
+              <div className={MyCartCSS.quantContainer}>
+                <div>
+                  <div>Quantity:</div>
+                  <p>{el.quantity}</p>{" "}
+                </div>
+                <div>
+                  {" "}
+                  <div> Normal price:</div>
+                  <p>{calculateNormalPrice(el.productId, el.quantity)}€</p>
+                </div>
+                <div>
+                  {" "}
+                  <div> Price after discount:</div>
+                  <p>
+                    {calculateQuantDiscount(el.productId, el.quantity)?.toFixed(
+                      2
+                    ) + "€"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </Modal>
   );
 };
 

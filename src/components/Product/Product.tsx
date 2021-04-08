@@ -62,12 +62,16 @@ const Product: React.FC<IProductProp> = ({ productId }) => {
         </div>
         <div className={ProductCSS.discountDiv}>
           {" "}
-          <span>{product?.price.toFixed(2) + "€"} </span>
-          {product?.discount ? (
-            <div className={ProductCSS.discountSpan}>-{product.discount}%</div>
-          ) : (
-            ""
-          )}
+          <span>
+            {product?.price.toFixed(2) + "€"}
+            {product?.discount ? (
+              <div className={ProductCSS.discountSpan}>
+                -{product.discount}%
+              </div>
+            ) : (
+              ""
+            )}
+          </span>
         </div>
       </div>
     </div>

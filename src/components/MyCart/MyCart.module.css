@@ -1,0 +1,60 @@
+.mycartContainer {
+  display: flex;
+  flex-direction: column;
+}
+.productContainer {
+  height: 70%;
+  display: flex;
+  border: 1px solid #ccc;
+  margin: 5px;
+  border-radius: 10px;
+}
+.productContainer div {
+  flex: 1;
+}
+.quantContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid #ccc;
+}
+.quantContainer div:nth-of-type(2) {
+  border-left: 1px solid #ccc;
+}
+.quantContainer div:nth-of-type(3) {
+  border-left: 1px solid #ccc;
+}
+.quantContainer div {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 13px;
+  align-items: center;
+  height: 80%;
+  margin: 5px;
+  padding: 5px;
+}
+.quantContainer p {
+  font-weight: 800;
+}
+.totalSumContainer {
+  display: flex;
+  width: 80%;
+  margin: 5px auto;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 5px solid #23887d;
+}
+.totalSumContainer div:nth-of-type(1) {
+  display: flex;
+  width: 30%;
+  font-size: 15px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.totalSumContainer p {
+  font-weight: 800;
+  font-size: 25px;
+}
