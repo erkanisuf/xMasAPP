@@ -53,18 +53,18 @@ const Product: React.FC<IProductProp> = ({ productId }) => {
   }
   return (
     <div className={ProductCSS.productContainer}>
-      <div>
+      <div className={ProductCSS.imgContainer}>
         <img src={product?.image} alt={product?.title} />
       </div>
       <div>
         <div>
           <p>{product?.title}</p>
         </div>
-        <div>
+        <div className={ProductCSS.discountDiv}>
           {" "}
-          <span>{product?.price.toFixed(2)} €</span>
+          <span>{product?.price.toFixed(2) + "€"} </span>
           {product?.discount ? (
-            <span style={{ color: "red" }}>{product.discount}%</span>
+            <div className={ProductCSS.discountSpan}>-{product.discount}%</div>
           ) : (
             ""
           )}

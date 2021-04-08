@@ -43,6 +43,7 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
     (state) => state.childrens.ChildrenApprovedItems
   ); // Redux Approved Childen list
   const { response, isLoading, error }: IFetchCart = useFetch(`${fetchURL}`); //Custom Hook fetches data
+  console.log(response);
   const [cart, setCart] = useState<ICart>(response); // Main items on Container(cart items from the API)
   const [approved, setApproved] = useState<IProduct[]>([]); // Approved items of wish list , passed to Approved component
   const [discarded, setDiscarded] = useState<IProduct[]>([]); // Disapproved items of wish list , passed to Disapproved component
@@ -122,7 +123,7 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
     }
   };
   return (
-    <div>
+    <div className={ChildCSS.wishListContainer}>
       <h1>{childname}</h1>
       <div className={ChildCSS.childContainerProducts}>
         {cart?.products.map((el) => {
@@ -147,8 +148,10 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
           );
         })}
       </div>
-      <Approved approvedItems={approved} />
-      <Discarded discardedItems={discarded} />
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <Approved approvedItems={approved} />
+        <Discarded discardedItems={discarded} />
+      </div>
     </div>
   );
 };

@@ -17,7 +17,7 @@ const Main = () => {
   const { response, isLoading, error }: IuseFetchAllProducts = useFetch(
     "https://fakestoreapi.com/products/"
   );
-
+  console.log(response);
   useEffect(() => {
     //Fetches all products from the Api , adds them to Global state so the <Product /> component can find them by the ID
     dispatch(addProductsFromApi(response));
@@ -26,8 +26,9 @@ const Main = () => {
   return (
     <div
       style={{
-        width: "100%",
+        width: "80%",
         display: "flex",
+        flexDirection: "column",
         margin: "0 auto",
         height: "100%",
         justifyContent: "center",
