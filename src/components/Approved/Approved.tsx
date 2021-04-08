@@ -12,7 +12,7 @@ const Approved: React.FC<IApproved> = ({ approvedItems }) => {
     <div className={ApprovedCSS.approvedContainer}>
       <h1>
         <CgSmileMouthOpen />
-        Approved wishes
+        Approved wishes - {approvedItems.length} items
       </h1>
       {approvedItems.map((el) => {
         return <Product key={uuidv4()} productId={el.productId} />;

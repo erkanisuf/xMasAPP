@@ -4,6 +4,7 @@ import ChildCSS from "./Child.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { GrFormCheckmark } from "react-icons/gr"; //Icon
 import { IoMdClose } from "react-icons/io"; //Icon
+
 import { useFetch } from "../../Hooks/useFetch";
 import Approved from "../Approved/Approved";
 import Discarded from "../Discarded/Discarded";
@@ -15,9 +16,12 @@ import {
 } from "../../Redux/ChildrensSlice";
 import { useDispatch } from "react-redux";
 import { changeProductPrice } from "../../Redux/MainSlice";
+import ChildrenImage from "../ChildrenImage/ChildrenImage";
+import Spinner from "../Spinner/Spinner";
 
 export interface IChildCompProp {
   childname: string;
+  childImage: string;
   fetchURL: string;
 }
 export interface IProduct {
@@ -37,7 +41,11 @@ export interface IFetchCart {
   isLoading: boolean;
   error: any;
 }
-const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
+const ChildComp: React.FC<IChildCompProp> = ({
+  childname,
+  fetchURL,
+  childImage,
+}) => {
   const dispatch = useDispatch();
   const allApproved = useAppSelector(
     (state) => state.childrens.ChildrenApprovedItems
@@ -122,9 +130,19 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
       );
     }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  } else if (error) {
+    return (
+      <h1 style={{ textAlign: "center", color: "red" }}>
+        Error. Something went wrong!
+      </h1>
+    );
+  }
   return (
     <div className={ChildCSS.wishListContainer}>
-      <h1>{childname}</h1>
+      <ChildrenImage name={childname} image={childImage} />
       <div className={ChildCSS.childContainerProducts}>
         {cart?.products.map((el) => {
           return (

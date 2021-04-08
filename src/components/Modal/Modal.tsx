@@ -5,7 +5,7 @@ interface IModal {
   children: React.ReactNode;
 }
 const Modal: React.FC<IModal> = ({ children }) => {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement | null>(null); // for the Modal
   console.log(modalRef.current);
   const handleClickOutside = (event: any) => {

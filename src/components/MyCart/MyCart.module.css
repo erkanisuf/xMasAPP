@@ -58,3 +58,18 @@
   font-weight: 800;
   font-size: 25px;
 }
+
+.btnBack {
+  border: 2px solid #1d59b4;
+  background-color: white;
+  outline: none;
+  padding: 20px;
+  border-radius: 10px;
+  color: #1d59b4;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btnBack:hover {
+  background-color: #598ef1;
+  color: white;
+}

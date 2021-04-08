@@ -12,7 +12,7 @@ const Discarded: React.FC<IApproved> = ({ discardedItems }) => {
     <div className={DiscardedCSS.discardedContainer}>
       <h1>
         <CgSmileSad />
-        Not approved
+        Not approved - {discardedItems.length} items
       </h1>
       {discardedItems.map((el) => {
         return <Product key={uuidv4()} productId={el.productId} />;

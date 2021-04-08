@@ -3,11 +3,14 @@ import ConfirmWindowCSS from "./ConfirmWindow.module.css";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { GrFormCheckmark } from "react-icons/gr"; //
 import { IoMdClose } from "react-icons/io"; //Icon
+import { useAppSelector } from "../../Redux/hooks";
 const ConfirmWindow = () => {
-  const [open, setOpen] = useState<boolean>(true);
+  const myCartItems = useAppSelector((state) => state.childrens.myCart); // Redux Approved Childen list
+  const [open, setOpen] = useState<boolean>(false);
   if (!open) {
     return (
       <button
+        disabled={myCartItems.length === 0 ? true : false}
         className={ConfirmWindowCSS.submitButton}
         onClick={() => setOpen(true)}
       >
@@ -19,7 +22,7 @@ const ConfirmWindow = () => {
   return (
     <div className={ConfirmWindowCSS.backgroundConfirm}>
       <div className={ConfirmWindowCSS.whiteConfirmContainer}>
-        <p>Are you sure you want to continue ?</p>
+        <p>Are you sure with your decision?</p>
         <div>
           <button className={ConfirmWindowCSS.confirmBtn}>
             <GrFormCheckmark fontSize="30px" style={{ color: "white" }} />

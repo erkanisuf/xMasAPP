@@ -1,5 +1,6 @@
 .backgroundConfirm {
   position: fixed;
+  top: 0;
   width: 100%;
   height: 50%;
   display: flex;
@@ -18,7 +19,7 @@
   flex-direction: column;
   padding: 25px;
   border-radius: 10px;
-  padding: 50px;
+
   border-radius: 10px;
   border: 5px solid #38c394;
 }
@@ -38,6 +39,10 @@
 }
 .submitButton:hover {
   background-color: #31d455;
+}
+.submitButton:disabled {
+  cursor: not-allowed;
+  background-color: grey;
 }
 
 .confirmBtn {
@@ -69,4 +74,17 @@
 }
 .cancelBtn:hover {
   background-color: #ff0547;
+}
+
+.spinner {
+  animation: spin infinite 1s linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

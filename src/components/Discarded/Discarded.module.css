@@ -13,10 +13,10 @@
 }
 
 .discardedContainer h1 {
-  border: 1px solid #ffb0b2;
-  border-radius: 10px;
+  background-color: #9e5d5f;
+  border-radius: 2px;
   text-align: center;
-
+  color: white;
   padding: 5px;
   font-size: 18px;
 }

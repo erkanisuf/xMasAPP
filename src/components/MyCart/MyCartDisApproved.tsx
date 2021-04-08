@@ -1,5 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../../Redux/hooks";
+import ChildrenImage from "../ChildrenImage/ChildrenImage";
 import Discarded from "../Discarded/Discarded";
 
 const MyCartDisApproved = () => {
@@ -11,15 +12,18 @@ const MyCartDisApproved = () => {
   //Function that finds the Childens Name from the id
   const findUserName = (param: number) => {
     const findChildren = myChildren.find((el) => el.id === param);
-    return findChildren?.name;
+    return findChildren ? findChildren : { name: "", image: "" };
   };
 
   return (
     <div>
       {allDisApproved.map((el) => {
         return (
-          <div key={el.userId} style={{ backgroundColor: "red" }}>
-            <p>{findUserName(el.userId)}</p>
+          <div key={el.userId}>
+            <ChildrenImage
+              name={findUserName(el.userId)?.name}
+              image={findUserName(el.userId)?.image}
+            />
             <Discarded discardedItems={el.products} />
           </div>
         );
