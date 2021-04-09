@@ -7,23 +7,35 @@
   z-index: 102;
   justify-content: center;
   align-items: center;
-  height: 1500px;
+  height: 100%;
   background-color: rgba(170, 165, 165, 0.582);
 }
 
 .whiteConfirmContainer {
   width: 100%;
-  height: 20%;
+
   background-color: white;
   display: flex;
   flex-direction: column;
   padding: 25px;
   border-radius: 10px;
-
+  height: 25%;
   border-radius: 10px;
   border: 5px solid #38c394;
 }
-
+/* This one is for the loading when doing post request*/
+.loadingContainer {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(179, 21, 21);
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  border-radius: 10px;
+  height: 80%;
+  border-radius: 10px;
+  border: 5px solid #af1f4a;
+}
 .whiteConfirmContainer p {
   font-size: 20px !important;
 }

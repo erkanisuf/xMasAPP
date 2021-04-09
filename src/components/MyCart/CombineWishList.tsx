@@ -14,7 +14,11 @@ const CombineWishList: React.FC<ICombineWishList> = ({ setPage, items }) => {
     <div>
       <div className={CombineCSS.totalSumContainer}>
         <h1>Full list of your decision</h1>
-        <button className={CombineCSS.NextBtn} onClick={() => setPage(2)}>
+        <button
+          className={CombineCSS.NextBtn}
+          onClick={() => setPage(2)}
+          disabled={items}
+        >
           <BiSkipNextCircle /> Next Step
         </button>
       </div>

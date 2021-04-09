@@ -48,8 +48,7 @@ const Main = () => {
         return (
           <ChildComp
             key={uuidv4()}
-            childname={el.name}
-            childImage={el.image}
+            childname={el.id}
             fetchURL={`https://fakestoreapi.com/carts/${el.id}`}
           />
         );

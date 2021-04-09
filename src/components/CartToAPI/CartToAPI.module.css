@@ -1,0 +1,12 @@
+.containerCombined {
+  display: flex;
+  width: 100%;
+}
+.container {
+  display: flex;
+  font-size: 10px;
+  width: 100% !important;
+  flex-direction: column;
+  border: 1px solid blue;
+  flex: 1 !important;
+}

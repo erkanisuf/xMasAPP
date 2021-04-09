@@ -20,8 +20,8 @@ import ChildrenImage from "../ChildrenImage/ChildrenImage";
 import Spinner from "../Spinner/Spinner";
 
 export interface IChildCompProp {
-  childname: string;
-  childImage: string;
+  childname: number;
+
   fetchURL: string;
 }
 export interface IProduct {
@@ -41,11 +41,7 @@ export interface IFetchCart {
   isLoading: boolean;
   error: any;
 }
-const ChildComp: React.FC<IChildCompProp> = ({
-  childname,
-  fetchURL,
-  childImage,
-}) => {
+const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
   const dispatch = useDispatch();
   const allApproved = useAppSelector(
     (state) => state.childrens.ChildrenApprovedItems
@@ -142,12 +138,12 @@ const ChildComp: React.FC<IChildCompProp> = ({
   }
   return (
     <div className={ChildCSS.wishListContainer}>
-      <ChildrenImage name={childname} image={childImage} />
+      <ChildrenImage name={childname} />
       <div className={ChildCSS.childContainerProducts}>
         {cart?.products.map((el) => {
           return (
             <div className={ChildCSS.itemContainer} key={uuidv4()}>
-              <Product productId={el.productId} />
+              <Product productId={el.productId ? el.productId : 0} />
               <div className={ChildCSS.buttonsContainer}>
                 <button
                   className={ChildCSS.approve}
