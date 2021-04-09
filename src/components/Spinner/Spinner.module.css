@@ -19,8 +19,8 @@
 }
 .smallspinner {
   animation: spin infinite 1s linear;
-  font-size: 15px;
-  color: #38c394;
+  font-size: 20px;
+  color: #000000;
 }
 
 @keyframes spin {

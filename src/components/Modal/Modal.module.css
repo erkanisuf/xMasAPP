@@ -33,3 +33,44 @@
 .closeButton:hover {
   color: #ff0547;
 }
+
+.checkOutContainer {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+}
+.checkOutContainer span {
+  width: 25px;
+  height: 20px;
+
+  border-radius: 100%;
+  text-align: center;
+
+  margin: 0px 2px;
+  font-size: 18px;
+  border: 2px solid white;
+  padding: 10px 15px;
+}
+.spanApproved {
+  background-color: #2aa17a;
+}
+.spanDiscarded {
+  background-color: #e78ba3;
+}
+.checkoutBtn {
+  cursor: pointer;
+  align-self: flex-end;
+  margin: 10px;
+  margin-right: 10%;
+  outline: none;
+  position: relative;
+  border-radius: 10px;
+  width: 20%;
+  font-size: 20px;
+  background-color: rgb(67, 69, 199);
+  color: white;
+  padding: 20px;
+}
+.checkoutBtn:hover {
+  background-color: rgb(69, 72, 238);
+}

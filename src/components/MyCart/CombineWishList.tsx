@@ -1,5 +1,4 @@
 import React from "react";
-import Modal from "../Modal/Modal";
 import MyCartApproved from "./MyCartApproved";
 import MyCartDisApproved from "./MyCartDisApproved";
 import CombineCSS from "./Combine.module.css";

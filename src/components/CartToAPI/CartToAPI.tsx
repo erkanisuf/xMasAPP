@@ -1,57 +1,92 @@
 import React, { useEffect, useState } from "react";
+
 import { OBJtoAPI } from "../../Redux/ChildrensSlice";
+import ChildrenImage from "../ChildrenImage/ChildrenImage";
 import SmallSpinner from "../Spinner/SmallSpinner";
 import CartToAPICSS from "./CartToAPI.module.css";
 
 interface ICartToAPI {
   usercart: OBJtoAPI;
+  type: TypeContainer;
 }
-interface IResponse {
-  response: {
-    id: number;
-    _id: string;
-    products: any; //  The Api returns empty products array.}
-  };
-  isLoading: boolean;
-  error: any;
+interface Iitem {
+  id: number;
+  _id: string;
+  products: any; // APi returns empty arr of this sinc eits not saving to the DB
 }
-const CartToAPI: React.FC<ICartToAPI> = ({ usercart }) => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [item, setItem] = useState<any>({});
-  const [error, setError] = useState<any>();
-  const postToAPI = () => {
-    setLoading(true);
-    fetch("https://fakestoreapi.com/carts", {
-      method: "POST",
-      body: JSON.stringify(usercart),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        setItem(json);
-        setLoading(true);
-      })
-      .catch((err) => console.log(err));
-  };
+type TypeContainer = "approved" | "discarded";
+const CartToAPI: React.FC<ICartToAPI> = ({ usercart, type }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [item, setItem] = useState<Iitem>({ id: 0, _id: "", products: [] });
+  const [error, setError] = useState<boolean>(false);
+
   useEffect(() => {
+    const abortCont = new AbortController();
+    const postToAPI = () => {
+      setLoading(true);
+      fetch("https://fakestoreapi.com/carts", {
+        method: "POST",
+        signal: abortCont.signal,
+        body: JSON.stringify(usercart),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          setItem(json);
+          setLoading(false);
+        })
+        .catch((err) => {
+          if (err.name !== "AbortError") {
+            setError(true);
+          }
+        });
+    };
     postToAPI();
-    return () => {};
+    return () => abortCont.abort();
   }, [usercart]);
+
   if (loading) {
     return (
-      <div className={CartToAPICSS.container}>
-        <span>{usercart.userId}</span>
+      <div
+        className={
+          type === "approved"
+            ? CartToAPICSS.containerGreen
+            : CartToAPICSS.containerRed
+        }
+      >
+        <ChildrenImage name={usercart.userId} />
         <SmallSpinner />
       </div>
     );
   } else if (error) {
     return (
-      <div className={CartToAPICSS.container}>Error. Something went wrong!</div>
+      <div
+        className={
+          type === "approved"
+            ? CartToAPICSS.containerGreen
+            : CartToAPICSS.containerRed
+        }
+      >
+        <ChildrenImage name={usercart.userId} />
+        <span className={CartToAPICSS.error}>Error , not saved!</span>
+      </div>
     );
   }
   return (
-    <div className={CartToAPICSS.container}>
-      <span style={{ color: "blue" }}>{usercart.userId}</span>
-      {item._id}
+    <div
+      className={
+        type === "approved"
+          ? CartToAPICSS.containerGreen
+          : CartToAPICSS.containerRed
+      }
+    >
+      <ChildrenImage name={usercart.userId} />
+      <span className={CartToAPICSS.success}>successfully saved!</span>
+
+      <span>
+        {" "}
+        <span style={{ fontWeight: 800 }}>ID:</span>
+        {item._id}
+      </span>
     </div>
   );
 };

@@ -1,6 +1,5 @@
-import { setPriority } from "node:os";
 import React, { useState } from "react";
-import { setSourceMapRange } from "typescript";
+
 import { useAppSelector } from "../../Redux/hooks";
 import ConfirmWindow from "../ConfirmWindow/ConfirmWindow";
 import Modal from "../Modal/Modal";

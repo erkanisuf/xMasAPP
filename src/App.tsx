@@ -1,33 +1,29 @@
 import React from "react";
 
-import "./App.css";
 import Main from "./components/Main";
 import MyCart from "./components/MyCart/MyCart";
-
+import AppCSS from "./App.module.css";
+import { FaTree } from "react-icons/fa";
 function App() {
-  const fetchtoapi = () => {
-    fetch("https://fakestoreapi.com/carts", {
-      method: "POST",
-      body: JSON.stringify({
-        userId: 5,
-        date: new Date(),
-        products: [
-          { productId: 5, quantity: 1 },
-          { productId: 1, quantity: 5 },
-        ],
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) => console.log(json));
-  };
+  // Main Elements are All Childrens with the products and approved and discarded items components.
+  //MyCart is the Modal with the Cart And there is also the Submit of the cart to the API.
   return (
     <div className="App">
-      <button onClick={fetchtoapi}>klii</button>
-      <h1> Droppe</h1>
-      <div style={{ display: "flex" }}>
-        <MyCart />
+      <h1 className={AppCSS.logo}>
+        <FaTree /> Droppe Xmas
+      </h1>
+      <div>
+        <div
+          style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}
+        >
+          <MyCart />
+        </div>
+        <Main />
       </div>
-      <Main />
+      <footer className={AppCSS.thefooter}>
+        {" "}
+        <h1>Thanks for the task ! :)</h1>
+      </footer>
     </div>
   );
 }

@@ -162,7 +162,14 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
           );
         })}
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          width: "80%",
+          margin: "0 auto",
+        }}
+      >
         <Approved approvedItems={approved} />
         <Discarded discardedItems={discarded} />
       </div>

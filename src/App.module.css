@@ -1,0 +1,21 @@
+.logo {
+  width: 100%;
+  background-color: rgb(32, 32, 32);
+  padding: 50px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  color: white;
+  text-shadow: 3px 3px 3px rgb(0, 0, 0);
+}
+.thefooter {
+  min-height: 300px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  color: white;
+  text-shadow: 3px 3px 3px rgb(0, 0, 0);
+  background-color: rgb(32, 32, 32);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

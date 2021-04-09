@@ -25,7 +25,7 @@ const ConfirmWindow = () => {
       <div className={ConfirmWindowCSS.backgroundConfirm}>
         <div className={ConfirmWindowCSS.loadingContainer}>
           {" "}
-          <CartToAPICombine />
+          <CartToAPICombine setOpen={setOpen} />
         </div>
       </div>
     );

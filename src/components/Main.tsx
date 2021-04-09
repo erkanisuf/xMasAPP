@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ChildComp from "./ChildComp/ChildComp";
 import { v4 as uuidv4 } from "uuid";
 import { IProductDesc } from "./Product/Product";
@@ -17,8 +17,8 @@ const Main = () => {
   const dispatch = useAppDispatch(); // Redux Hook
   const { response, isLoading, error }: IuseFetchAllProducts = useFetch(
     "https://fakestoreapi.com/products/"
-  );
-  console.log(isLoading);
+  ); //UseFetch Custom Hook for data from API
+
   useEffect(() => {
     //Fetches all products from the Api , adds them to Global state so the <Product /> component can find them by the ID
     dispatch(addProductsFromApi(response));
