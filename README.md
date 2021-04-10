@@ -19,7 +19,7 @@ Application that can approve and disapprove wishes (in this case of user`s child
 ## Preview
 
 <br />
-Live demo: 
+Live demo: https://xmasapp.netlify.app/
 <br />
 Frontend Deployed to: Netlify
 <br />
