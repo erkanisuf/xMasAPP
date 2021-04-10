@@ -44,7 +44,7 @@ const Main = () => {
         background: "#f5f5f5",
       }}
     >
-      {myChildren.map((el, index) => {
+      {myChildren.map((el) => {
         return (
           <ChildComp
             key={uuidv4()}

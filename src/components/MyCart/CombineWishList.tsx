@@ -9,6 +9,7 @@ interface ICombineWishList {
   items: boolean;
 }
 const CombineWishList: React.FC<ICombineWishList> = ({ setPage, items }) => {
+  //This component combines Approved and DisApproved products (inside the Modal)
   return (
     <div>
       <div className={CombineCSS.totalSumContainer}>

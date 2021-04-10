@@ -40,3 +40,18 @@
   width: 150px;
   padding-right: 100px;
 }
+
+@media only screen and (max-width: 1024px) {
+  .approvedContainer {
+    padding: 1px;
+  }
+  .approvedContainer p {
+    width: 100%;
+  }
+  .approvedContainer img {
+    width: 100%;
+  }
+  .approvedContainer div {
+    justify-content: center;
+  }
+}

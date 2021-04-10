@@ -8,7 +8,7 @@ import CartToAPICombine from "../CartToAPI/CartToAPICombine";
 const ConfirmWindow = () => {
   const myCartItems = useAppSelector((state) => state.childrens.myCart); // Redux Approved Childen list
   const [open, setOpen] = useState<boolean>(false);
-  const [postRequest, setPostRequest] = useState<boolean>(false);
+  const [postRequest, setPostRequest] = useState<boolean>(false); // This State after press Submit by Cart button opens the component that sends poSt request
   if (!open) {
     return (
       <button

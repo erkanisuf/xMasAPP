@@ -5,10 +5,14 @@ import CartToAPICSS from "./CartToAPI.module.css";
 import { CgSmileMouthOpen } from "react-icons/cg";
 import { CgSmileSad } from "react-icons/cg";
 import { CgCloseR } from "react-icons/cg";
+import useWidth from "../../Hooks/useWidth";
+import { v4 as uuidv4 } from "uuid";
 interface ICartToAPICombine {
   setOpen: any;
 }
 const CartToAPICombine: React.FC<ICartToAPICombine> = ({ setOpen }) => {
+  //Combined Componend of approved and discarded items , for the result of the API form the post request.
+  const { width } = useWidth(); // custom hook for width check (and height)
   const approvedItems = useAppSelector(
     (state) => state.childrens.ChildrenApprovedItems
   );
@@ -21,6 +25,7 @@ const CartToAPICombine: React.FC<ICartToAPICombine> = ({ setOpen }) => {
         width: "100%",
         height: "80%",
         display: "flex ",
+
         justifyContent: "flex-start",
         alignItems: "flex-start",
         flexDirection: "column",
@@ -41,7 +46,7 @@ const CartToAPICombine: React.FC<ICartToAPICombine> = ({ setOpen }) => {
           display: "flex ",
           justifyContent: "flex-start",
           alignItems: "flex-start",
-
+          flexDirection: width > 1024 ? "row" : "column",
           position: "relative",
         }}
       >
@@ -67,9 +72,7 @@ const CartToAPICombine: React.FC<ICartToAPICombine> = ({ setOpen }) => {
             Approved Items
           </h2>
           {approvedItems.map((el) => {
-            return (
-              <CartToAPI key={el.userId} usercart={el} type={"approved"} />
-            );
+            return <CartToAPI key={uuidv4()} usercart={el} type={"approved"} />;
           })}
         </div>
         <div
@@ -91,7 +94,7 @@ const CartToAPICombine: React.FC<ICartToAPICombine> = ({ setOpen }) => {
           </h2>
           {discardedItems.map((el) => {
             return (
-              <CartToAPI key={el.userId} usercart={el} type={"discarded"} />
+              <CartToAPI key={uuidv4()} usercart={el} type={"discarded"} />
             );
           })}
         </div>

@@ -11,8 +11,11 @@ interface IChild {
   image: string;
 }
 const ChildrenImage: React.FC<IChildrenImage> = ({ name }) => {
+  //Component that shows image and name of children
   const myChildren = useAppSelector((state) => state.main.myChildren); // Redux Main State
   const [child, setChild] = useState<IChild>();
+
+  //finds children information form the Redux
   useMemo(() => {
     const findChild = myChildren.find((el) => el.id === name); // this finds child from Redux by ID
     setChild(findChild);

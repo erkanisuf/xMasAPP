@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot <ChildrenImage/> Component 1`] = `
+<div
+  className="containerChild"
+>
+  <img
+    alt=""
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVY3efFyktSBShjhBcNUt2JuH3F1r0qnlt1g&usqp=CAU"
+  />
+  <h1>
+    Pekka
+    \`s wishlist 
+  </h1>
+</div>
+`;

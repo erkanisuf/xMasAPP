@@ -18,10 +18,10 @@ import { useDispatch } from "react-redux";
 import { changeProductPrice } from "../../Redux/MainSlice";
 import ChildrenImage from "../ChildrenImage/ChildrenImage";
 import Spinner from "../Spinner/Spinner";
+import useWidth from "../../Hooks/useWidth";
 
 export interface IChildCompProp {
   childname: number;
-
   fetchURL: string;
 }
 export interface IProduct {
@@ -36,18 +36,20 @@ export interface ICart {
   __v: number;
 }
 
+//interface for fetching data from API
 export interface IFetchCart {
   response: ICart;
   isLoading: boolean;
   error: any;
 }
 const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
+  const { width } = useWidth(); // custom hook for width check (and height)
   const dispatch = useDispatch();
   const allApproved = useAppSelector(
     (state) => state.childrens.ChildrenApprovedItems
   ); // Redux Approved Childen list
   const { response, isLoading, error }: IFetchCart = useFetch(`${fetchURL}`); //Custom Hook fetches data
-  console.log(response);
+
   const [cart, setCart] = useState<ICart>(response); // Main items on Container(cart items from the API)
   const [approved, setApproved] = useState<IProduct[]>([]); // Approved items of wish list , passed to Approved component
   const [discarded, setDiscarded] = useState<IProduct[]>([]); // Disapproved items of wish list , passed to Disapproved component
@@ -77,7 +79,7 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
     setApproved(copiedState);
     // Then Removes the item from the Cart container
     RemoveProductFromContainer(param);
-    console.log(approved);
+
     //To redux Approved with child`s id (name)
     dispatch(
       ChildProductToApproved({
@@ -132,7 +134,7 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
   } else if (error) {
     return (
       <h1 style={{ textAlign: "center", color: "red" }}>
-        Error. Something went wrong!
+        !Error. Something went wrong!
       </h1>
     );
   }
@@ -146,12 +148,14 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
               <Product productId={el.productId ? el.productId : 0} />
               <div className={ChildCSS.buttonsContainer}>
                 <button
+                  data-testid="approvebtn"
                   className={ChildCSS.approve}
                   onClick={() => ApproveProduct(el)}
                 >
                   <GrFormCheckmark size="25px" />
                 </button>
                 <button
+                  data-testid="discardbtn"
                   className={ChildCSS.disapprove}
                   onClick={() => DiscardProduct(el)}
                 >
@@ -165,7 +169,7 @@ const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: width > 1024 ? "row" : "column",
           width: "80%",
           margin: "0 auto",
         }}

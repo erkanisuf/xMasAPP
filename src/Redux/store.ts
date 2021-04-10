@@ -3,6 +3,8 @@ import ChildrensSlice from "./ChildrensSlice";
 import MainSlice from "./MainSlice";
 // ...
 
+//MAIN: holds the products and the fake array of childrens object
+// CHILDREN : holds the approved items and discarded items of the child , laso myCart property that holds the item that customer will  "buy"
 export const store = configureStore({
   reducer: { main: MainSlice, childrens: ChildrensSlice },
 });

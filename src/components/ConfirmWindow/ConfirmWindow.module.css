@@ -99,3 +99,19 @@
     transform: rotate(360deg);
   }
 }
+
+@media only screen and (max-width: 1024px) {
+  .submitButton {
+    width: 100%;
+    margin: 5px auto;
+  }
+
+  .confirmBtn {
+    width: 100%;
+    padding: 15px;
+  }
+  .cancelBtn {
+    width: 100%;
+    padding: 15px;
+  }
+}

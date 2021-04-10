@@ -15,7 +15,6 @@ const Modal: React.FC<IModal> = ({ children }) => {
   ); // Redux state For the .Lenght of the items on the Submit Choices Button .
   const [open, setOpen] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement | null>(null); // for the Modal
-  console.log(modalRef.current);
   const handleClickOutside = (event: any) => {
     // Closes Modal if its clicked on the black transperant if its white its ok
     if (event.target === modalRef.current) {
@@ -28,6 +27,23 @@ const Modal: React.FC<IModal> = ({ children }) => {
       document.removeEventListener("click", handleClickOutside, true);
     };
   }, []);
+
+  //Returns the Lenght of Discarded Products (for the Submit Your choices button)
+  const lenghtofItemDiscarded = () => {
+    const copyArr = [...discardedItems];
+    let lenght = 0;
+    copyArr.map((el) => el.products.map((z) => lenght++));
+
+    return lenght;
+  };
+  //Returns the Lenght of Discarded Products (for the Submit Your choices button)
+  const lenghtofItemApproved = () => {
+    const copyArr = [...approvedItems];
+    let lenght = 0;
+    copyArr.map((el) => el.products.map((z) => lenght++));
+
+    return lenght;
+  };
   if (!open) {
     return (
       <div className={ModalCSS.checkOutContainer}>
@@ -35,9 +51,11 @@ const Modal: React.FC<IModal> = ({ children }) => {
           <RiShoppingCartLine />
           Submit your choices
           <span className={ModalCSS.spanDiscarded}>
-            {discardedItems.length}
+            {lenghtofItemDiscarded()}
           </span>
-          <span className={ModalCSS.spanApproved}>{approvedItems.length} </span>
+          <span className={ModalCSS.spanApproved}>
+            {lenghtofItemApproved()}{" "}
+          </span>
         </button>
       </div>
     );

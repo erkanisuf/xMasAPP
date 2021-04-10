@@ -56,9 +56,11 @@ export const MainSlice = createSlice({
   reducers: {
     //Redux Tips
     // Use the PayloadAction type to declare the contents of `action.payload`
+    // This one adds the products from the API to the state so later i can find the product information form the id
     addProductsFromApi: (state, action: PayloadAction<IProductDesc[]>) => {
       state.products = action.payload;
     },
+    // Changes price of product if there is Discount on it
     changeProductPrice: (state, action: PayloadAction<IChangePrice>) => {
       const copyProducts = [...state.products];
       const findIndex = copyProducts.findIndex(

@@ -7,14 +7,15 @@ import Product from "../Product/Product";
 import CombineWishList from "./CombineWishList";
 import MyCartCSS from "./MyCart.module.css";
 import { BiSkipPrevious } from "react-icons/bi";
+import { v4 as uuidv4 } from "uuid";
 const MyCart = () => {
-  const myCartItems = useAppSelector((state) => state.childrens.myCart);
+  const myCartItems = useAppSelector((state) => state.childrens.myCart); // Redux Items in myCart
   const disApproved = useAppSelector(
     (state) => state.childrens.ChildrenDiscardedItems
   ); // Redux Approved Childen list
   const AllProducts = useAppSelector((state) => state.main.products); // Redux Approved Childen list
   const [step, setStep] = useState<number>(1);
-  console.log(step);
+
   //Sums Normal Price of product with the quantity and with the Discount
   const calculateQuantDiscount = (param: number, param2: number) => {
     const findProductPrice = AllProducts.find((el) => el.id === param);
@@ -87,7 +88,7 @@ const MyCart = () => {
           )}
           {myCartItems.map((el) => {
             return (
-              <div key={el.productId} className={MyCartCSS.productContainer}>
+              <div key={uuidv4()} className={MyCartCSS.productContainer}>
                 <Product productId={el.productId} />
 
                 <div className={MyCartCSS.quantContainer}>

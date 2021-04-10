@@ -52,3 +52,9 @@
   border-radius: 100%;
   font-size: 15px !important;
 }
+
+@media only screen and (max-width: 1024px) {
+  .productContainer p {
+    font-size: 12px;
+  }
+}
