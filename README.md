@@ -34,6 +34,6 @@ Frontend Deployed to: Netlify
 
 ## Installation
 
-- git clone ;
+- git clone  https://github.com/erkanisuf/xMasAPP.git;
 - npm install - to install all the packages ;
 - npm start
