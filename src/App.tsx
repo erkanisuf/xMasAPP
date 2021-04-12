@@ -9,7 +9,8 @@ function App() {
   // Main Elements are All Childrens with the products and approved and discarded items components.
   //MyCart is the Modal with the Cart And there is also the Submit of the cart to the API.
   //ChildComp component is with the main functions .
-  const { width } = useWidth(); // custom hook for width check (and height)
+  // const { width } = useWidth(); // custom hook for width check (and height)
+  const width = window.innerWidth;
   return (
     <div style={{ margin: "0 auto", width: "100%" }}>
       <h1 className={AppCSS.logo}>

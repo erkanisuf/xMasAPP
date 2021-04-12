@@ -43,7 +43,8 @@ export interface IFetchCart {
   error: any;
 }
 const ChildComp: React.FC<IChildCompProp> = ({ childname, fetchURL }) => {
-  const { width } = useWidth(); // custom hook for width check (and height)
+  // const { width } = useWidth(); // custom hook for width check (and height)
+  const width = window.innerWidth;
   const dispatch = useDispatch();
   const allApproved = useAppSelector(
     (state) => state.childrens.ChildrenApprovedItems
