@@ -21,7 +21,7 @@ const CartToAPI: React.FC<ICartToAPI> = ({ usercart, type }) => {
   const [item, setItem] = useState<Iitem>({ id: 0, _id: "", products: [] });
   const [error, setError] = useState<boolean>(false);
   const dispatch = useDispatch();
-  console.log("USER CART", usercart);
+
   useEffect(() => {
     const abortCont = new AbortController();
     const postToAPI = () => {
