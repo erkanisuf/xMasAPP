@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { OBJtoAPI } from "../../Redux/ChildrensSlice";
 import ChildrenImage from "../ChildrenImage/ChildrenImage";
@@ -19,7 +20,8 @@ const CartToAPI: React.FC<ICartToAPI> = ({ usercart, type }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [item, setItem] = useState<Iitem>({ id: 0, _id: "", products: [] });
   const [error, setError] = useState<boolean>(false);
-
+  const dispatch = useDispatch();
+  console.log("USER CART", usercart);
   useEffect(() => {
     const abortCont = new AbortController();
     const postToAPI = () => {
@@ -42,7 +44,7 @@ const CartToAPI: React.FC<ICartToAPI> = ({ usercart, type }) => {
     };
     postToAPI();
     return () => abortCont.abort();
-  }, [usercart]);
+  }, [usercart, dispatch]);
 
   if (loading) {
     return (

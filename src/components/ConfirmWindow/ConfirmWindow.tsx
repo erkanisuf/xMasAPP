@@ -5,10 +5,18 @@ import { GrFormCheckmark } from "react-icons/gr"; //
 import { IoMdClose } from "react-icons/io"; //Icon
 import { useAppSelector } from "../../Redux/hooks";
 import CartToAPICombine from "../CartToAPI/CartToAPICombine";
+import { useDispatch } from "react-redux";
+import { cleanMyCart } from "../../Redux/ChildrensSlice";
 const ConfirmWindow = () => {
+  const dispatch = useDispatch();
   const myCartItems = useAppSelector((state) => state.childrens.myCart); // Redux Approved Childen list
   const [open, setOpen] = useState<boolean>(false);
   const [postRequest, setPostRequest] = useState<boolean>(false); // This State after press Submit by Cart button opens the component that sends poSt request
+
+  const ConfirmOrder = () => {
+    setPostRequest(true);
+    dispatch(cleanMyCart());
+  };
   if (!open) {
     return (
       <button
@@ -37,7 +45,7 @@ const ConfirmWindow = () => {
           <div>
             <button
               className={ConfirmWindowCSS.confirmBtn}
-              onClick={() => setPostRequest(true)}
+              onClick={ConfirmOrder}
             >
               <GrFormCheckmark fontSize="30px" style={{ color: "white" }} />
               Confirm

@@ -19,6 +19,10 @@ const CartToAPICombine: React.FC<ICartToAPICombine> = ({ setOpen }) => {
   const discardedItems = useAppSelector(
     (state) => state.childrens.ChildrenDiscardedItems
   );
+
+  const redirect = () => {
+    window.location.reload();
+  };
   return (
     <div
       style={{
@@ -32,12 +36,9 @@ const CartToAPICombine: React.FC<ICartToAPICombine> = ({ setOpen }) => {
         position: "relative",
       }}
     >
-      <button
-        className={CartToAPICSS.closeButton}
-        onClick={() => setOpen(false)}
-      >
+      <button className={CartToAPICSS.closeButton} onClick={redirect}>
         <CgCloseR />
-        Close
+        Close and redirect
       </button>
       <div
         style={{

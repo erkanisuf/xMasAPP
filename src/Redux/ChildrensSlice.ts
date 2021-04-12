@@ -71,6 +71,9 @@ export const ChildrensSlice = createSlice({
 
       state.myCart = copyMyCart;
     },
+    cleanMyCart: (state) => {
+      state.myCart = [];
+    },
   },
 });
 
@@ -78,6 +81,7 @@ export const {
   ChildProductToApproved,
   ChildProductToDiscarded,
   AddItemToMyCart,
+  cleanMyCart,
 } = ChildrensSlice.actions;
 
 //Redux Setup from their Docs.
