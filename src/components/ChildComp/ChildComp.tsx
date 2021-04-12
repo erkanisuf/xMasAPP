@@ -18,7 +18,7 @@ import { useDispatch } from "react-redux";
 import { changeProductPrice } from "../../Redux/MainSlice";
 import ChildrenImage from "../ChildrenImage/ChildrenImage";
 import Spinner from "../Spinner/Spinner";
-import useWidth from "../../Hooks/useWidth";
+// import useWidth from "../../Hooks/useWidth";
 
 export interface IChildCompProp {
   childname: number;

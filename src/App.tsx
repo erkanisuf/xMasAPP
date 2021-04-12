@@ -4,7 +4,7 @@ import Main from "./components/Main";
 import MyCart from "./components/MyCart/MyCart";
 import AppCSS from "./App.module.css";
 import { FaTree } from "react-icons/fa";
-import useWidth from "./Hooks/useWidth";
+// import useWidth from "./Hooks/useWidth";
 function App() {
   // Main Elements are All Childrens with the products and approved and discarded items components.
   //MyCart is the Modal with the Cart And there is also the Submit of the cart to the API.
